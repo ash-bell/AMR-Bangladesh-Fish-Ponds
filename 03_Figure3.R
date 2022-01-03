@@ -58,24 +58,8 @@ df = rbind(F1A,F1B,F1C,F1D,
            F6A,F6B,F6C,F6D,
            F8A,F8B,F8C,F8D)
 
-#remove nudge genes :( loss from 30k to 1k
-taxonomy = df[df$Nudged != "True", ]
-
-# define the levels of taxa in "Taxonomy"
-taxa = c("superkingdom","phylum","class","order","family","genus","species","strain")
-
-# seperate the 7 levels of taxa + strain from taxonomy as new columns
-ponds = taxonomy %>% separate(Taxonomy, taxa, "; ")
-
-#remove strain column
-ponds$strain = NULL
-taxa = c("superkingdom","phylum","class","order","family","genus","species")
-
-# remove any "NA" or blank spaces in taxa columns with "Unclassified"
-ponds[taxa] = lapply(ponds[taxa], gsub, pattern = "NA|^$", replacement = "Unclassified")
-
-# change <NA> to "Unclassified"
-ponds[taxa][is.na(ponds[taxa])] = "Unclassified"
+#remove nudge genes
+ponds = df[df$Nudged != "True", ]
 
 # if a gene conferes multiple resistances, split into new row copies with each resistance
 ponds = ponds %>% mutate(Drug.Class = strsplit(as.character(Drug.Class), "; ")) %>% unnest(Drug.Class)
