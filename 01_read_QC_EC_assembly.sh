@@ -1,4 +1,4 @@
-# bbtools version February 13, 2020
+# bbtools version 38.79
 # SPAdes version 3.15.3
 
 ### Read QC and error correction ###
