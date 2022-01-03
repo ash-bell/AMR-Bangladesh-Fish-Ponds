@@ -9,5 +9,4 @@ rgi main -i REPLACE_ME/REPLACE_ME_scaffolds.fasta \
 --clean \
 --low_quality \
 -d NA \
---split_prodigal_job \
---exclude_nudge
+--split_prodigal_job
